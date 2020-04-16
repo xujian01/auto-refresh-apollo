@@ -38,6 +38,16 @@
             <scope>provided</scope>
         </dependency>
     </dependencies>
+    <distributionManagement>
+        <repository>
+            <id>Baijia_Release</id>
+            <url>https://nexus.baijiahulian.com/repository/releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>Baijia_Snapshot</id>
+            <url>https://nexus.baijiahulian.com/repository/snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
 
     <build>
         <plugins>

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
+import org.springframework.core.annotation.AnnotationAttributes;
 import org.springframework.core.type.AnnotationMetadata;
 
 import java.util.Objects;
@@ -19,7 +20,11 @@ public class AutoRefreshApolloRegistrar implements ImportBeanDefinitionRegistrar
     @Override
     public void registerBeanDefinitions(AnnotationMetadata importingClassMetadata, BeanDefinitionRegistry registry) {
         registerBeanDefinitionIfNotExists(registry, ConfigurationPropertiesListenerRegistry.class.getName(),ConfigurationPropertiesListenerRegistry.class);
-        registerBeanDefinitionIfNotExists(registry, GatewayListenerRegistry.class.getName(),GatewayListenerRegistry.class);
+        AnnotationAttributes attributes = AnnotationAttributes.fromMap(importingClassMetadata
+                .getAnnotationAttributes(EnableAutoRefreshGatewayApollo.class.getName()));
+        if (attributes != null) {
+            registerBeanDefinitionIfNotExists(registry, GatewayListenerRegistry.class.getName(),GatewayListenerRegistry.class);
+        }
     }
     private boolean registerBeanDefinitionIfNotExists(BeanDefinitionRegistry registry, String beanName,
                                                       Class<?> beanClass) {
