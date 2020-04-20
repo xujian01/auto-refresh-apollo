@@ -3,10 +3,8 @@ package com.jiaoyan.autorefreshapollo.spring.boot;
 import com.ctrip.framework.apollo.Config;
 import com.ctrip.framework.apollo.ConfigService;
 import com.jiaoyan.autorefreshapollo.spring.annotation.AutoRefreshApollo;
-import com.jiaoyan.autorefreshapollo.model.GlobeNamespace;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.environment.EnvironmentChangeEvent;
@@ -34,8 +32,6 @@ public class ConfigurationPropertiesListenerRegistry implements ApplicationEvent
     //指定的环境
     @Value("${spring.profiles.active:}")
     private String env;
-    @Autowired
-    private GlobeNamespace globeNamespace;
 
     @PostConstruct
     public void init() {
