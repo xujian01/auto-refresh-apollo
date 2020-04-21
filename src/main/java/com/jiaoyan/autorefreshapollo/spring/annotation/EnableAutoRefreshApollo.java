@@ -7,7 +7,7 @@ import java.lang.annotation.*;
 /**
  * @author xujian03
  * @date 2020/4/16 11:05
- * @description
+ * @description 开启自动添加listener，用于自动刷新@ConfigurationProperties配置，作用于启动类
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)

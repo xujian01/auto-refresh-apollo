@@ -35,17 +35,19 @@ public class ConfigurationPropertiesListenerRegistry implements ApplicationEvent
 
     @PostConstruct
     public void init() {
+        //获取带有@AutoRefreshApollo注解的bean
         Map<String,Object> beanMap = applicationContext.getBeansWithAnnotation(AutoRefreshApollo.class);
         for (Object bean : beanMap.values()) {
             Set<String> prefixSet = new HashSet<>();
             Class clazz = bean.getClass();
+            //获取该类上的@ConfigurationProperties注解
             ConfigurationProperties configurationProperties = (ConfigurationProperties) clazz.getAnnotation(ConfigurationProperties.class);
             if (configurationProperties == null) continue;
             String prefix = configurationProperties.value();
             if (StringUtils.isEmpty(prefix)) prefix = configurationProperties.prefix();
             if (!StringUtils.isEmpty(prefix)) prefix+=".";
             prefixSet.add(prefix);
-
+            //获取该类上的@AutoRefreshApollo注解
             AutoRefreshApollo clazzAnnotation = (AutoRefreshApollo) clazz.getAnnotation(AutoRefreshApollo.class);
             String namespacePrefix = clazzAnnotation.value();
             if (!StringUtils.isEmpty(env)) namespacePrefix+="-";
