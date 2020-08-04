@@ -60,8 +60,6 @@ public class ConfigurationPropertiesListenerRegistry implements ApplicationEvent
                 log.info("刷新配置-----------START");
                 //重新绑定配置
                 publisher.publishEvent(new EnvironmentChangeEvent(changeEvent.changedKeys()));
-                //刷新配置bean
-                publisher.publishEvent(new RefreshRoutesEvent(bean));
                 log.info("刷新配置-----------END");
             },null,prefixSet);
             log.info("添加Apollo配置监听器-----------END");
