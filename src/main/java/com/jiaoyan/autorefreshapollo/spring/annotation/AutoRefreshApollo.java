@@ -17,7 +17,7 @@ public @interface AutoRefreshApollo {
     String value();
 
     /**
-     * apollo namespace的前缀，如application.yml的.yml部分，如果不设置则自动寻找项目的全局namespace
+     * apollo namespace的后缀，如application.yml的.yml部分，默认为yml
      * @return
      */
     String namespaceSuffix() default "yml";
