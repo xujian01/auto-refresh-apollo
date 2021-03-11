@@ -1,5 +1,7 @@
 package com.jiaoyan.autorefreshapollo.spring.annotation;
 
+import org.springframework.core.annotation.AliasFor;
+
 import java.lang.annotation.*;
 
 /**
@@ -14,7 +16,17 @@ public @interface AutoRefreshApollo {
      * apollo namespace的前缀，如application.yml的application部分，如果不设置则自动寻找项目的全局namespace
      * @return
      */
+    @AliasFor("namespacePrefix")
     String value();
+
+    @AliasFor("value")
+    String namespacePrefix();
+
+    /**
+     * namespace是否有环境区分，如XXX-dev.yml，XXX-test.yml
+     * @return
+     */
+    boolean envIsolate() default true;
 
     /**
      * apollo namespace的后缀，如application.yml的.yml部分，默认为yml

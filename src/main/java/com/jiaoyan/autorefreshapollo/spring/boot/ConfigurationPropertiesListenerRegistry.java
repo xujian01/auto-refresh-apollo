@@ -50,10 +50,11 @@ public class ConfigurationPropertiesListenerRegistry implements ApplicationEvent
             //获取该类上的@AutoRefreshApollo注解
             AutoRefreshApollo clazzAnnotation = (AutoRefreshApollo) clazz.getAnnotation(AutoRefreshApollo.class);
             String namespacePrefix = clazzAnnotation.value();
-            if (!StringUtils.isEmpty(env)) namespacePrefix+="-";
+            boolean envIsolate = clazzAnnotation.envIsolate();
+            if (envIsolate && !StringUtils.isEmpty(env)) namespacePrefix=namespacePrefix+"-"+env;
 
             String namespaceSuffix = clazzAnnotation.namespaceSuffix();
-            Config config = ConfigService.getConfig(namespacePrefix+env+"."+namespaceSuffix);
+            Config config = ConfigService.getConfig(namespacePrefix+"."+namespaceSuffix);
             //该方法有三个参数，第一个参数是具体的listener，第二个参数是感兴趣的key，第三个参数是感兴趣的key的前缀
             log.info("添加Apollo配置监听器-----------START");
             config.addChangeListener(changeEvent -> {
