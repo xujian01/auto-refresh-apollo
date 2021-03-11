@@ -16,11 +16,7 @@ public @interface AutoRefreshApollo {
      * apollo namespace的前缀，如application.yml的application部分，如果不设置则自动寻找项目的全局namespace
      * @return
      */
-    @AliasFor("namespacePrefix")
     String value();
-
-    @AliasFor("value")
-    String namespacePrefix();
 
     /**
      * namespace是否有环境区分，如XXX-dev.yml，XXX-test.yml
