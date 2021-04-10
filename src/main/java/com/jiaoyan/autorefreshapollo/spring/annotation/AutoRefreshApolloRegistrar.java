@@ -20,15 +20,11 @@ public class AutoRefreshApolloRegistrar implements ImportBeanDefinitionRegistrar
     @Override
     public void registerBeanDefinitions(AnnotationMetadata importingClassMetadata, BeanDefinitionRegistry registry) {
         //加了@EnableAutoRefreshApollo注解才会注册ConfigurationPropertiesListenerRegistry
-        AnnotationAttributes attributes = AnnotationAttributes.fromMap(importingClassMetadata
-                .getAnnotationAttributes(EnableAutoRefreshApollo.class.getName()));
-        if (attributes != null) {
+        if (importingClassMetadata.hasAnnotation(EnableAutoRefreshApollo.class.getName())) {
             registerBeanDefinitionIfNotExists(registry, ConfigurationPropertiesListenerRegistry.class.getName(),ConfigurationPropertiesListenerRegistry.class);
         }
         //加了@EnableAutoRefreshGatewayApollo注解才会注册GatewayListenerRegistry
-        AnnotationAttributes attributes1 = AnnotationAttributes.fromMap(importingClassMetadata
-                .getAnnotationAttributes(EnableAutoRefreshGatewayApollo.class.getName()));
-        if (attributes1 != null) {
+        if (importingClassMetadata.hasAnnotation(EnableAutoRefreshGatewayApollo.class.getName())) {
             registerBeanDefinitionIfNotExists(registry, GatewayListenerRegistry.class.getName(),GatewayListenerRegistry.class);
         }
     }
